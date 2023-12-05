@@ -12,3 +12,10 @@ create table teacher(
     country varchar(100),
     primary key(id)
 );
+create table student(
+	id int,
+    name varchar(100),
+    age int,
+    country varchar(100),
+    primary key(id)
+);
