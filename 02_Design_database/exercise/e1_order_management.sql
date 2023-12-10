@@ -9,7 +9,7 @@ create table number_phone (
 
 -- Tạo bảng nha_cc
 create table nha_cc (
-    MaNCC int primary key,
+    MaNCC int primary key unique,
     TenNCC varchar(100),
     Diachi varchar(100),
     SDT varchar(30),
