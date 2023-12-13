@@ -1,0 +1,17 @@
+html{
+    font-size: large;
+}
+h1{
+    border-bottom: 2px solid #dcdcdc;
+}
+p{
+    font-family: sans-serif;
+    text-indent: 30px;
+}
+label{
+    color: blue;
+}
+a{
+    text-decoration: none;
+    color: #053498;
+}

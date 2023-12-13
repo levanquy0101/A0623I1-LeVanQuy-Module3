@@ -1,0 +1,44 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container{
+    display: block;
+    width: 100vw;
+    height: 70vh;
+    background-color: antiquewhite;
+}
+.container .sidebar ul li{
+    height: 100%;
+    border: 1px solid red;
+    cursor: pointer;
+}
+.container .sidebar ul li:hover{
+    background-color: red;
+}
+.sidebar{
+    display:inline-block;
+    width: 10%;
+    height: 100%;
+    background-color: aqua;
+}
+img{
+    /* height: 10%; */
+    width: 20%;
+}
+.content{
+    display: inline-block;
+    width: 80%;
+    height: 100%;
+}
+
+h1{
+    background-color: #dcdcdc;
+    color: blue;
+    text-align: center;
+}
+footer{
+    text-align: center;
+    background-color: rgb(141, 219, 77);
+}
