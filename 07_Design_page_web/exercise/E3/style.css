@@ -1,0 +1,94 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+/* CSS cho phần đầu trang */
+.header{
+    position: relative;
+    background-color: #222222;
+    width: 100vw;
+    height: 8vh;
+}
+.header ul li{
+    display: inline-block;
+    line-height: 8vh;
+}
+.header ul li a{
+    display: inline-block;
+    padding: 0 20px;
+    color: #dcdcdc;
+    list-style: none;
+    text-decoration: none;
+}
+.header ul li a:hover{
+    color: #fff;
+    background-color: #080808;
+}
+.login{
+    position: absolute;
+    top:0;
+    right: 0;
+    line-height: 8vh;
+    padding: 0 20px;
+}
+.login a{
+    color: #fff;
+    text-decoration: none;
+}
+.login ion-icon {
+    vertical-align: middle;
+  }
+ion-icon {
+    font-size: 20px;
+  }
+
+/* CSS cho phần thân trang */
+.container{
+    display: flex;
+}
+.aside1{
+    display: inline-block;
+    width: 15vw;
+    height: 84vh;
+    background-color: #f1f1f1;
+    text-align: center;
+}
+.aside1 ul{
+    padding-top: 20px;
+}
+.aside1 ul li{
+    padding: 10px 0;
+}
+.aside1 ul li a{
+    text-decoration: none;
+}
+.content{
+    flex: 1;
+    padding: 15px;
+}
+.aside2{
+    width: 15vw;
+    height: 84vh;
+    background-color: #f1f1f1;
+}
+.aside2 .ads{
+    width: 12vw;
+    height: 10vh;
+    border: 1px solid #dcdcdc;
+    margin: 20px auto;
+    text-align: center;
+    line-height: 10vh;
+}
+/* CSS cho phần cuối trang */
+.footer{
+    width: 100vw;
+    height: 8vh;
+    background-color: #555555;
+}
+.footer p{
+    text-align: center;
+    line-height: 8vh;
+    color: #fff;
+}

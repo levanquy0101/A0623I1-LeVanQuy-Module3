@@ -34,14 +34,14 @@ ten_loai_khach varchar(45)
 );
 create table khach_hang(
 ma_khach_hang int primary key auto_increment,
-ma_loai_khach int,
 ho_ten varchar(45),
 ngay_sinh date,
-gioi_tinh bit(1),
+gioi_tinh int,
 so_cmnd varchar(45),
 so_dien_thoai varchar(45),
 email varchar(45),
 dia_chi varchar(45),
+ma_loai_khach int,
 foreign key (ma_loai_khach) references loai_khach(ma_loai_khach)
 );
 create table kieu_thue(
