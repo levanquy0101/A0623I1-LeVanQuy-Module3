@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <title>Responsive Images with Bootstrap</title>
+  <style>
+    html{
+        margin: 4px;
+        padding: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Responsive Image Gallery</h1>
+<strong>Resize the browser window to see the effect.</strong><br><br>
+  <div class="container">
+    <div class="row">
+      <!-- Đối với màn hình lớn hơn hoặc bằng 700px -->
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <img src="img_fjords.jpg" alt="Image 1" class="img-fluid">
+        <p>Add a description of the image here</p>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <img src="img_forest.jpg" alt="Image 2" class="img-fluid">
+        <p>Add a description of the image here</p>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <img src="img_lights.jpg" alt="Image 3" class="img-fluid">
+        <p>Add a description of the image here</p>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <img src="img_mountains.jpg" alt="Image 4" class="img-fluid">
+        <p>Add a description of the image here</p>
+      </div>
+    </div>
+  </div>
+<p>This example use media queries to re-arrange the images on different screen sizes: for screens larger than 700px wide,
+     it will show four images side by side, for screens smaller than 700px, it will show two images side by side. For screens smaller than 500px,
+      the images will stack vertically (100%).</p>
+  <!-- Bao gồm tập tin JavaScript cần thiết của Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>
