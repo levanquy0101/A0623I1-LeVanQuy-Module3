@@ -20,11 +20,45 @@ join loai_khach on loai_khach.ma_loai_khach = khach_hang.ma_loai_khach and khach
 join hop_dong on hop_dong.ma_khach_hang = khach_hang.ma_khach_hang
 group by khach_hang.ho_ten, hop_dong.ma_khach_hang
 order by count_da_tung_dat_phong asc;
+
 -- Câu 5: Hiển thị ma_khach_hang, ho_ten, ten_loai_khach, ma_hop_dong, ten_dich_vu, ngay_lam_hop_dong, ngay_ket_thuc, tong_tien 
-select khach_hang.ma_khach_hang, khach_hang.ho_ten, loai_khach.ten_loai_khach, hop_dong.ma_hop_dong, dich_vu.ten_dich_vu,
- hop_dong.ngay_lam_hop_dong, hop_dong.ngay_ket_thuc
-from khach_hang
-join loai_khach on loai_khach.ma_loai_khach = khach_hang.ma_loai_khach
-join hop_dong on hop_dong.ma_khach_hang = khach_hang.ma_khach_hang
-join dich_vu on dich_vu.ma_dich_vu = hop_dong.ma_dich_vu
-order by khach_hang.ma_khach_hang asc;
+SELECT kh.ma_khach_hang, kh.ho_ten, lk.ten_loai_khach, 
+hd.ma_hop_dong, dv.ten_dich_vu, hd.ngay_lam_hop_dong, hd.ngay_ket_thuc,
+IFNULL(SUM(dvdk.gia * hdct.so_luong),0) + dv.chi_phi_thue AS tong_tien  
+FROM khach_hang kh
+LEFT JOIN loai_khach lk ON kh.ma_loai_khach = lk.ma_loai_khach  
+LEFT JOIN hop_dong hd ON kh.ma_khach_hang = hd.ma_khach_hang
+LEFT JOIN dich_vu dv ON hd.ma_dich_vu = dv.ma_dich_vu
+LEFT JOIN hop_dong_chi_tiet hdct ON hd.ma_hop_dong = hdct.ma_hop_dong  
+LEFT JOIN dich_vu_di_kem dvdk ON hdct.ma_dich_vu_di_kem = dvdk.ma_dich_vu_di_kem
+GROUP BY kh.ma_khach_hang, hd.ma_hop_dong;
+
+-- Câu 6: Hiển thị ma_dich_vu, ten_dich_vu, dien_tich, chi_phi_thue, ten_loai_dich_vu của tất cả các loại dịch vụ chưa từng được khách hàng thực hiện đặt từ quý 1 của năm 2021 (Quý 1 là tháng 1, 2, 3).
+SELECT ma_dich_vu, ten_dich_vu, dien_tich, chi_phi_thue, ten_loai_dich_vu
+FROM dich_vu
+JOIN loai_dich_vu USING (ma_loai_dich_vu)
+WHERE
+    NOT EXISTS (
+        SELECT
+            1
+        FROM
+            hop_dong
+        WHERE
+            YEAR(ngay_lam_hop_dong) = 2021
+            AND QUARTER(ngay_lam_hop_dong) = 1
+            AND dich_vu.ma_dich_vu = hop_dong.ma_dich_vu
+    );
+-- Câu 8: Hiển thị thông tin ho_ten khách hàng có trong hệ thống, với yêu cầu ho_ten không trùng nhau.
+-- Cách 1:
+SELECT
+    DISTINCT(ho_ten)
+FROM
+    khach_hang;
+-- Cách 2:
+SELECT ho_ten
+FROM khach_hang
+GROUP BY ho_ten;
+-- Cách 3:
+SELECT ho_ten FROM khach_hang
+UNION
+SELECT ho_ten FROM khach_hang;
