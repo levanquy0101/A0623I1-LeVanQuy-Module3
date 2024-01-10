@@ -48,7 +48,22 @@ WHERE
             AND QUARTER(ngay_lam_hop_dong) = 1
             AND dich_vu.ma_dich_vu = hop_dong.ma_dich_vu
     );
--- Câu 8: Hiển thị thông tin ho_ten khách hàng có trong hệ thống, với yêu cầu ho_ten không trùng nhau.
+
+-- Câu 7: Hiển thị thông tin ma_dich_vu, ten_dich_vu, dien_tich, so_nguoi_toi_da, chi_phi_thue, ten_loai_dich_vu của tất cả các loại dịch vụ đã từng được khách hàng đặt phòng trong năm 2020 nhưng chưa từng được khách hàng đặt phòng trong năm 2021.
+select dich_vu.ma_dich_vu, dich_vu.ten_dich_vu, dich_vu.dien_tich, dich_vu.so_nguoi_toi_da, dich_vu.chi_phi_thue, loai_dich_vu.ten_loai_dich_vu
+from dich_vu
+join hop_dong on hop_dong.ma_dich_vu = dich_vu.ma_dich_vu
+join loai_dich_vu on dich_vu.ma_loai_dich_vu = loai_dich_vu.ma_loai_dich_vu
+where hop_dong.ngay_ket_thuc like "2020%" and hop_dong.ma_dich_vu not in (
+select hop_dong.ma_dich_vu
+from hop_dong
+join dich_vu on hop_dong.ma_dich_vu = dich_vu.ma_dich_vu
+where hop_dong.ngay_ket_thuc like "2021%"
+)
+group by dich_vu.ma_dich_vu
+;
+
+-- Câu 8: Hiển thị thông tin ho_ten khách hàng có trong hệ thống, với yêu cầu ho_ten không trùng nhau
 -- Cách 1:
 SELECT
     DISTINCT(ho_ten)
@@ -62,3 +77,10 @@ GROUP BY ho_ten;
 SELECT ho_ten FROM khach_hang
 UNION
 SELECT ho_ten FROM khach_hang;
+
+-- Câu 9: Thực hiện thống kê doanh thu theo tháng, nghĩa là tương ứng với mỗi tháng trong năm 2021 thì sẽ có bao nhiêu khách hàng thực hiện đặt phòng.
+SELECT MONTH(ngay_lam_hop_dong) AS Thang, COUNT(DISTINCT ma_khach_hang) AS SoLuongKhachHang
+FROM hop_dong
+WHERE YEAR(ngay_lam_hop_dong) = 2021
+GROUP BY MONTH(ngay_lam_hop_dong)
+ORDER BY Thang;
