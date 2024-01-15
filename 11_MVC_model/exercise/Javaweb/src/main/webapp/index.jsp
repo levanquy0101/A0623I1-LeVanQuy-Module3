@@ -8,6 +8,6 @@
 <h1><%= "Java Web!" %>
 </h1>
 <br/>
-<a href="product/list.jsp">Danh sách sản phẩm</a>
+<a href="/ProductServlet">Danh sách sản phẩm</a>
 </body>
 </html>
