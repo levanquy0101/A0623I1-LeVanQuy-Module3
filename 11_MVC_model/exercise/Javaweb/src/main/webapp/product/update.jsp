@@ -12,12 +12,14 @@
     <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
-<form action="/CreateServlet" class="main-form" style="margin: 200px" method="post">
-<input type="number"class="input-q1" placeholder="Nhập id để sửa" name="id">
-<input type="text"class="input-q1" placeholder="Nhập tên" name="name">
-<input type="text"class="input-q1" placeholder="Nhập ngày sản xuất" name="date">
-<input type="text"class="input-q1" placeholder="Nhập giá" name="price">
-<input type="text"class="input-q1" placeholder="Nhập thông tin sản phẩm" name="about"><br>
+<form action="/ProductServlet" class="main-form" style="margin: 200px" method="post">
+<input type="hidden" name="action" value="update">    
+<input type="hidden"class="input-q1" placeholder="Nhập id để sửa" name="id" value="${product.id}">
+<h2>Sản phẩm có ID là ${product.id}</h2>
+<input type="text"class="input-q1" placeholder="Nhập tên" name="name"  value="${product.name}">
+<input type="text"class="input-q1" placeholder="Nhập ngày sản xuất" name="date" value="${product.date}">
+<input type="text"class="input-q1" placeholder="Nhập giá" name="price" value="${product.price}">
+<input type="text"class="input-q1" placeholder="Nhập thông tin sản phẩm" name="about" value="${product.about}"><br>
 <input type="submit" value="Sửa dữ liệu" class="submit">
 </form>
 </body>

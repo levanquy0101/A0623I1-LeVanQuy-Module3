@@ -21,14 +21,19 @@ public class ProductServlet extends HttpServlet {
         }
         switch (action) {
             case "create":
-                request.getRequestDispatcher("/student/create.jsp").forward(request, response);
+                request.getRequestDispatcher("/product/create.jsp").forward(request, response);
                 break;
             case "update":
-                Integer code = Integer.valueOf(request.getParameter("code"));
-                Product product = imlProductServices.findById(code);
+                Integer id = Integer.valueOf(request.getParameter("id"));
+                Product product = imlProductServices.findById(id);
                 request.setAttribute("product", product);
                 request.getRequestDispatcher("product/update.jsp").forward(request, response);
                 break;
+            case "delete":
+                Integer idDelete = Integer.valueOf(request.getParameter("id"));
+                Product productDelete = imlProductServices.findById(idDelete);
+                request.setAttribute("product", productDelete);
+                request.getRequestDispatcher("product/delete.jsp").forward(request, response);
             default:
               List<Product> productList = imlProductServices.findAll();
               request.setAttribute("productList",productList);
@@ -38,6 +43,35 @@ public class ProductServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        if(action == null) {
+            action = "";
+        }
+        switch (action) {
+            case "create":
+                String nameAdd = request.getParameter("name");
+                String dateAdd = request.getParameter("date");
+                Double priceAdd = Double.valueOf(request.getParameter("price"));
+                String aboutAdd = request.getParameter("about");
+                Product productNew = new Product(0,nameAdd,dateAdd,priceAdd,aboutAdd);
+                imlProductServices.save(productNew);
+                response.sendRedirect("/ProductServlet");
+                break;
+            case "update":
+                Integer idUpdate = Integer.valueOf(request.getParameter("id"));
+                String nameUpdate = request.getParameter("name");
+                String dateUpdate = request.getParameter("date");
+                Double priceUpdate = Double.valueOf(request.getParameter("price"));
+                String aboutUpdate = request.getParameter("about");
+                Product productUpdate = new Product(idUpdate,nameUpdate,dateUpdate,priceUpdate,aboutUpdate);
+                imlProductServices.save(productUpdate);
+                response.sendRedirect("/ProductServlet");
+                break;
+            case "delete":
+                Integer idDelete = Integer.valueOf(request.getParameter("id"));
+                imlProductServices.remove(idDelete);
+                response.sendRedirect("/ProductServlet");
 
+        }
     }
 }

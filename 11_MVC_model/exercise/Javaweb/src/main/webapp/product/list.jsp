@@ -18,9 +18,6 @@
             color: #00a6fb;
             width: 40px;
             height: 20px;
-            border-radius: 999px;
-            /*padding: 4px;*/
-            /*margin: 4px;*/
         }
     </style>
 </head>
@@ -33,7 +30,7 @@
     <th>Name</th>
     <th>Date</th>
     <th>Price</th>
-    <th>Image</th>
+    <th>About</th>
     <th>Action</th>
     </thead>
     <tbody>
@@ -45,8 +42,8 @@
         <td>${product.price}</td>
         <td>${product.about}</td>
         <td>
-            <button onclick="window.location.href='?action=update&code=${product.id}'">Update</button>
-            <button onclick="window.location.href='?action=delete&code=${product.id}'">Delete</button>
+            <button onclick="window.location.href='?action=update&id=${product.id}'">Update</button>
+            <button onclick="window.location.href='?action=delete&id=${product.id}'">Delete</button>
         </td>
     </tr>
     </c:forEach>

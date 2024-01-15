@@ -1,6 +1,7 @@
 package com.example.javaweb.repository;
 import com.example.javaweb.model.Product;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ImlProductRepositories implements IProductRepositories {
@@ -16,23 +17,43 @@ public class ImlProductRepositories implements IProductRepositories {
     }
 
 
-
     public List<Product> findAll() {
         return productList;
     }
 
-    public void save(Product productNew) {
-        if (productNew.getId() == 0) {
+    public void save(Product productNU) {
+        if (productNU.getId() == 0) {
             // Nếu id là 0, tức là sản phẩm mới, thì thêm vào danh sách
-            productNew.setId(productList.size() + 1);
-            productList.add(productNew);
+            int lastID = productList.get(productList.size()-1).getId();
+            productNU.setId(lastID+1);
+            productList.add(productNU);
         } else {
             // Nếu id đã tồn tại, cập nhật thông tin của sản phẩm
             for (int i = 0; i < productList.size(); i++) {
-                if (productList.get(i).getId() == productNew.getId()) {
-                    productList.set(i, productNew);
+                if (productList.get(i).getId() == productNU.getId()) {
+                    productList.set(i, productNU);
                     break;
                 }
+            }
+        }
+    }
+
+    @Override
+    public Product findById(Integer id) {
+        for (Product product : productList) {
+            if (product.getId() == id) {
+                return product;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void remove(int idDelete) {
+        for(int i=0;i<productList.size();i++){
+            if(productList.get(i).getId() == idDelete){
+                productList.remove(productList.get(i));
+//                productList.size();
             }
         }
     }

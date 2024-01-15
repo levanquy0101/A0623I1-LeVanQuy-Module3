@@ -2,7 +2,12 @@ package com.example.javaweb.services;
 
 import com.example.javaweb.model.Product;
 
-public interface IProductServices {
-    Product findById(Integer code);
+import java.util.List;
 
+public interface IProductServices {
+    List<Product> findAll();
+    void save(Product productNU);
+    Product findById(Integer id);
+
+    void remove(int idDelete);
 }

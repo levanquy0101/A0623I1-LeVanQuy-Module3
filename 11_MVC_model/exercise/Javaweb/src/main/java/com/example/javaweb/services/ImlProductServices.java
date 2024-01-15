@@ -13,12 +13,18 @@ public class ImlProductServices implements IProductServices {
         return imlProductRepositories.findAll();
     }
 
-    public void save(Product productNew) {
-        imlProductRepositories.save(productNew);
+    public void save(Product productNU) {
+        imlProductRepositories.save(productNU);
     }
 
     @Override
-    public Product findById(Integer code) {
-        return null;
+    public Product findById(Integer id) {
+        return imlProductRepositories.findById(id);
     }
+
+    @Override
+    public void remove(int idDelete) {
+        imlProductRepositories.remove(idDelete);
+    }
+
 }

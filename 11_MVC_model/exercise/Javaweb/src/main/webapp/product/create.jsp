@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
-<form action="/CreateServlet" class="main-form" style="margin: 200px" method="post">
+<form action="/ProductServlet" class="main-form" style="margin: 200px" method="post">
+    <input type="hidden" name="action" value="create">
 <input type="text"class="input-q1" placeholder="Nhập tên" name="name">
 <input type="text"class="input-q1" placeholder="Nhập ngày sản xuất" name="date">
 <input type="text"class="input-q1" placeholder="Nhập giá" name="price">
