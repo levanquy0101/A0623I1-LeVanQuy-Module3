@@ -23,6 +23,7 @@
 </head>
 <body>
 <main class="main-table">
+    <a href="/product/searchByName.jsp">Tìm kiếm theo tên</a>
     <button onclick="window.location.href='/product/create.jsp'">New Add</button>
 <table class="table">
     <thead>

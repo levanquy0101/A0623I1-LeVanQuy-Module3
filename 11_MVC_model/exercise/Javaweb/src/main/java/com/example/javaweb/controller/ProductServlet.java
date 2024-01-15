@@ -34,6 +34,13 @@ public class ProductServlet extends HttpServlet {
                 Product productDelete = imlProductServices.findById(idDelete);
                 request.setAttribute("product", productDelete);
                 request.getRequestDispatcher("product/delete.jsp").forward(request, response);
+                break;
+            case "search":
+                String findName = request.getParameter("name");
+                Product productFindName = imlProductServices.findByName(findName);
+                request.setAttribute("product",productFindName);
+                request.getRequestDispatcher("/product/searchByName.jsp").forward(request,response);
+                break;
             default:
               List<Product> productList = imlProductServices.findAll();
               request.setAttribute("productList",productList);

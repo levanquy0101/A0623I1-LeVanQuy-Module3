@@ -27,4 +27,9 @@ public class ImlProductServices implements IProductServices {
         imlProductRepositories.remove(idDelete);
     }
 
+    @Override
+    public Product findByName(String findName) {
+        return imlProductRepositories.findByName(findName);
+    }
+
 }

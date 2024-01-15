@@ -10,4 +10,6 @@ public interface IProductServices {
     Product findById(Integer id);
 
     void remove(int idDelete);
+
+    Product findByName(String findName);
 }
