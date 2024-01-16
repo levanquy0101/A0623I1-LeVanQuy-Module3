@@ -17,8 +17,33 @@
     <input type="text" placeholder="Nhập tên sản phẩm cần tìm: " name="name">
     <button type="submit">Tìm kiếm</button>
 </form>
-<c:if test="${product.name != null}">
-    <p>Sản phẩm có ID là: ${product.id}</p>
+<c:if test="${productListName != null}">
+<table class="table">
+    <thead>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Date</th>
+    <th>Price</th>
+    <th>About</th>
+    <th>Action</th>
+    </thead>
+    <tbody>
+    <c:forEach items="${productListName}" var="product">
+        <tr>
+            <td>${product.id}</td>
+            <td>${product.name}</td>
+            <td>${product.date}</td>
+            <td>${product.price}</td>
+            <td>${product.about}</td>
+            <td>
+                <button onclick="window.location.href='?action=update&id=${product.id}'">Update</button>
+                <button onclick="window.location.href='?action=delete&id=${product.id}'">Delete</button>
+            </td>
+        </tr>
+    </c:forEach>
+    </tbody>
 </c:if>
+    <p>${message}</p>
+</table>
 </body>
 </html>

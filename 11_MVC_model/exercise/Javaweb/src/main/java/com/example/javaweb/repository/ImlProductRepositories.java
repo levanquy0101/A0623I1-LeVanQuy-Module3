@@ -58,14 +58,26 @@ public class ImlProductRepositories implements IProductRepositories {
         }
     }
 
+//    @Override
+//    public Product findByName(String findName) {
+//        for (Product product : productList) {
+//            if (product.getName().contains(findName)) {
+//                return product;
+//            }
+//        }
+//        return null;
+//    }
+
     @Override
-    public Product findByName(String findName) {
-        for (int i=0;i<productList.size();i++){
-            if(productList.get(i).getName().equals(findName)){
-                return productList.get(i);
+    public List<Product> findName(String findName) {
+        List<Product> productsName = new ArrayList<>();
+        for (Product product : productList) {
+            if (product.getName().contains(findName)) {
+                productsName.add(product);
             }
         }
-        return null;
+        return productsName;
     }
+
 }
 

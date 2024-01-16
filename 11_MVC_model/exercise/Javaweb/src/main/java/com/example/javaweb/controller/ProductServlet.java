@@ -36,10 +36,21 @@ public class ProductServlet extends HttpServlet {
                 request.getRequestDispatcher("product/delete.jsp").forward(request, response);
                 break;
             case "search":
+                String message = "Không tìm thấy sản phẩm";
                 String findName = request.getParameter("name");
-                Product productFindName = imlProductServices.findByName(findName);
-                request.setAttribute("product",productFindName);
+                if(!findName.isEmpty()){
+                List<Product> productFindNameList = imlProductServices.findName(findName);
+                if(productFindNameList.size()>0){
+                request.setAttribute("productListName",productFindNameList);
                 request.getRequestDispatcher("/product/searchByName.jsp").forward(request,response);
+                }else {
+                    request.setAttribute("message",message);
+                    request.getRequestDispatcher("/product/searchByName.jsp").forward(request,response);
+                }
+                }
+                else {
+                    response.sendRedirect("/product/searchByName.jsp");
+                }
                 break;
             default:
               List<Product> productList = imlProductServices.findAll();
@@ -78,7 +89,6 @@ public class ProductServlet extends HttpServlet {
                 Integer idDelete = Integer.valueOf(request.getParameter("id"));
                 imlProductServices.remove(idDelete);
                 response.sendRedirect("/ProductServlet");
-
         }
     }
 }
