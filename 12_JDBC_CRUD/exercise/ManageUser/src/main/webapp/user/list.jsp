@@ -13,6 +13,16 @@
   </h2>
 </center>
 <div align="center">
+  <form action="/users" >
+    <input type="hidden" name="action" value="search">
+    <input type="text" placeholder="Tìm kiếm theo country" name="country">
+    <select name="" id="">
+      <option value="">Sắp xếp theo</option>
+      <option value="">Name A-Z</option>
+      <option value="">Name Z-A</option>
+    </select>
+    <button type="submit">Lọc</button>
+  </form>
   <table border="1" cellpadding="5">
     <caption><h2>List of Users</h2></caption>
     <tr>

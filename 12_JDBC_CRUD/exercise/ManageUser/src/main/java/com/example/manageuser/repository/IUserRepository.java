@@ -1,11 +1,11 @@
-package com.example.manageuser.services;
+package com.example.manageuser.repository;
 
 import com.example.manageuser.model.User;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public interface iUserServices {
+public interface IUserRepository {
     public void insertUser(User user) throws SQLException;
 
     public User selectUser(int id);
@@ -15,4 +15,6 @@ public interface iUserServices {
     public boolean deleteUser(int id) throws SQLException;
 
     public boolean updateUser(User user) throws SQLException;
+
+    List<User> searchUser(String country);
 }

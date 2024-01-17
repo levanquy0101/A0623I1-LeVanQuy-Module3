@@ -1,13 +1,13 @@
 package com.example.manageuser.services;
 
 import com.example.manageuser.model.User;
-import com.example.manageuser.repositories.imlUserRepositories;
+import com.example.manageuser.repository.ImlUserRepository;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public class imlUserServices implements iUserServices {
-    private final imlUserRepositories imlUserRepositories = new imlUserRepositories();
+public class ImlUserService implements IUserService {
+    private final ImlUserRepository imlUserRepositories = new ImlUserRepository();
 
     @Override
     public void insertUser(User user) throws SQLException {
@@ -32,5 +32,10 @@ public class imlUserServices implements iUserServices {
     @Override
     public boolean updateUser(User user) throws SQLException {
         return imlUserRepositories.updateUser(user);
+    }
+
+    @Override
+    public List<User> searchUser(String country) {
+        return imlUserRepositories.searchUser(country);
     }
 }

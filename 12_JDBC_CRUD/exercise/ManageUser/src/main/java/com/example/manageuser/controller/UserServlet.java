@@ -1,6 +1,6 @@
 package com.example.manageuser.controller;
 import com.example.manageuser.model.User;
-import com.example.manageuser.services.imlUserServices;
+import com.example.manageuser.services.ImlUserService;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -10,10 +10,10 @@ import java.util.List;
 @WebServlet(name = "UserServlet", urlPatterns = "/users")
 public class UserServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private imlUserServices userDAO;
+    private ImlUserService userDAO;
 
     public void init() {
-        userDAO = new imlUserServices();
+        userDAO = new ImlUserService();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -54,6 +54,8 @@ public class UserServlet extends HttpServlet {
                 case "delete":
                     deleteUser(request, response);
                     break;
+                case "search":
+                    searchUser(request,response);
                 default:
                     listUser(request, response);
                     break;
@@ -61,6 +63,16 @@ public class UserServlet extends HttpServlet {
         } catch (SQLException ex) {
             throw new ServletException(ex);
         }
+    }
+
+    private void searchUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String country = request.getParameter("country");
+//        userDAO.searchUser(country);
+
+        List<User> listUserFind = userDAO.searchUser(country);
+        request.setAttribute("listUser", listUserFind);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("user/list.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void listUser(HttpServletRequest request, HttpServletResponse response)
