@@ -1,6 +1,6 @@
 package com.example.javaweb.controller;
 import com.example.javaweb.model.Product;
-import com.example.javaweb.services.ImlProductServices;
+import com.example.javaweb.services.ImlProductService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +12,7 @@ import java.util.List;
 
 @WebServlet(name = "ProductServlet", value = "/ProductServlet")
 public class ProductServlet extends HttpServlet {
-    private final ImlProductServices imlProductServices = new ImlProductServices();
+    private final ImlProductService imlProductService = new ImlProductService();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -25,13 +25,13 @@ public class ProductServlet extends HttpServlet {
                 break;
             case "update":
                 Integer id = Integer.valueOf(request.getParameter("id"));
-                Product product = imlProductServices.findById(id);
+                Product product = imlProductService.findById(id);
                 request.setAttribute("product", product);
                 request.getRequestDispatcher("product/update.jsp").forward(request, response);
                 break;
             case "delete":
                 Integer idDelete = Integer.valueOf(request.getParameter("id"));
-                Product productDelete = imlProductServices.findById(idDelete);
+                Product productDelete = imlProductService.findById(idDelete);
                 request.setAttribute("product", productDelete);
                 request.getRequestDispatcher("product/delete.jsp").forward(request, response);
                 break;
@@ -39,13 +39,13 @@ public class ProductServlet extends HttpServlet {
                 String message = "Không tìm thấy sản phẩm";
                 String findName = request.getParameter("name");
                 if(!findName.isEmpty()){
-                List<Product> productFindNameList = imlProductServices.findName(findName);
+                List<Product> productFindNameList = imlProductService.findName(findName);
                 if(productFindNameList.size()>0){
-                request.setAttribute("productListName",productFindNameList);
-                request.getRequestDispatcher("/product/searchByName.jsp").forward(request,response);
+                request.setAttribute("productList",productFindNameList);
+                request.getRequestDispatcher("/product/list.jsp").forward(request,response);
                 }else {
                     request.setAttribute("message",message);
-                    request.getRequestDispatcher("/product/searchByName.jsp").forward(request,response);
+                    request.getRequestDispatcher("/product/list.jsp").forward(request,response);
                 }
                 }
                 else {
@@ -53,7 +53,7 @@ public class ProductServlet extends HttpServlet {
                 }
                 break;
             default:
-              List<Product> productList = imlProductServices.findAll();
+              List<Product> productList = imlProductService.findAll();
               request.setAttribute("productList",productList);
               request.getRequestDispatcher("/product/list.jsp").forward(request,response);
         }
@@ -72,7 +72,7 @@ public class ProductServlet extends HttpServlet {
                 Double priceAdd = Double.valueOf(request.getParameter("price"));
                 String aboutAdd = request.getParameter("about");
                 Product productNew = new Product(0,nameAdd,dateAdd,priceAdd,aboutAdd);
-                imlProductServices.save(productNew);
+                imlProductService.save(productNew);
                 response.sendRedirect("/ProductServlet");
                 break;
             case "update":
@@ -82,12 +82,12 @@ public class ProductServlet extends HttpServlet {
                 Double priceUpdate = Double.valueOf(request.getParameter("price"));
                 String aboutUpdate = request.getParameter("about");
                 Product productUpdate = new Product(idUpdate,nameUpdate,dateUpdate,priceUpdate,aboutUpdate);
-                imlProductServices.save(productUpdate);
+                imlProductService.save(productUpdate);
                 response.sendRedirect("/ProductServlet");
                 break;
             case "delete":
                 Integer idDelete = Integer.valueOf(request.getParameter("id"));
-                imlProductServices.remove(idDelete);
+                imlProductService.remove(idDelete);
                 response.sendRedirect("/ProductServlet");
         }
     }

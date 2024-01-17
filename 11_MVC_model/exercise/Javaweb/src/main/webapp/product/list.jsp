@@ -23,7 +23,12 @@
 </head>
 <body>
 <main class="main-table">
-    <a href="/product/searchByName.jsp">Tìm kiếm theo tên</a>
+    <form action="/ProductServlet">
+        <input type="hidden" name="action" value="search">
+        <input type="text" placeholder="Nhập tên sản phẩm cần tìm: " name="name">
+        <button type="submit">Tìm kiếm</button>
+    </form>
+    <p>${message}</p>
     <button onclick="window.location.href='/product/create.jsp'">New Add</button>
 <table class="table">
     <thead>

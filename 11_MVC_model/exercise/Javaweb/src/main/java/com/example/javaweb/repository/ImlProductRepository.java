@@ -1,10 +1,9 @@
 package com.example.javaweb.repository;
 import com.example.javaweb.model.Product;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
-public class ImlProductRepositories implements IProductRepositories {
+public class ImlProductRepository implements IProductRepository {
     protected static List<Product> productList ;
     static {
         productList = new ArrayList<>();
