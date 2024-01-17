@@ -79,7 +79,7 @@ UNION
 SELECT ho_ten FROM khach_hang;
 
 -- Câu 9: Thực hiện thống kê doanh thu theo tháng, nghĩa là tương ứng với mỗi tháng trong năm 2021 thì sẽ có bao nhiêu khách hàng thực hiện đặt phòng.
-SELECT MONTH(ngay_lam_hop_dong) AS Thang, COUNT(DISTINCT ma_khach_hang) AS SoLuongKhachHang
+SELECT MONTH(ngay_lam_hop_dong) AS Thang, COUNT(DISTINCT productsma_khach_hang) AS SoLuongKhachHang
 FROM hop_dong
 WHERE YEAR(ngay_lam_hop_dong) = 2021
 GROUP BY MONTH(ngay_lam_hop_dong)

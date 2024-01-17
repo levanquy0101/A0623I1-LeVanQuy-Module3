@@ -1,0 +1,36 @@
+package com.example.manageuser.services;
+
+import com.example.manageuser.model.User;
+import com.example.manageuser.repositories.imlUserRepositories;
+
+import java.sql.SQLException;
+import java.util.List;
+
+public class imlUserServices implements iUserServices {
+    private final imlUserRepositories imlUserRepositories = new imlUserRepositories();
+
+    @Override
+    public void insertUser(User user) throws SQLException {
+        imlUserRepositories.insertUser(user);
+    }
+
+    @Override
+    public User selectUser(int id) {
+        return imlUserRepositories.selectUser(id);
+    }
+
+    @Override
+    public List<User> selectAllUsers() {
+        return imlUserRepositories.selectAllUsers();
+    }
+
+    @Override
+    public boolean deleteUser(int id) throws SQLException {
+        return imlUserRepositories.deleteUser(id);
+    }
+
+    @Override
+    public boolean updateUser(User user) throws SQLException {
+        return imlUserRepositories.updateUser(user);
+    }
+}
