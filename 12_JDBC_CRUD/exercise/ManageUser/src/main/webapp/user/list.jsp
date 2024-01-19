@@ -16,13 +16,15 @@
   <form action="/users" >
     <input type="hidden" name="action" value="search">
     <input type="text" placeholder="Tìm kiếm theo country" name="country">
-    <select name="" id="">
-      <option value="">Sắp xếp theo</option>
-      <option value="">Name A-Z</option>
-      <option value="">Name Z-A</option>
-    </select>
     <button type="submit">Lọc</button>
   </form>
+  <select name="sort" id="" onchange="handleChange(this.value)">
+    <option value="">Sắp xếp theo</option>
+    <option value="0">Mặc định</option>
+    <option value="1">Name A-Z</option>
+    <option value="2">Name Z-A</option>
+
+  </select>
   <table border="1" cellpadding="5">
     <caption><h2>List of Users</h2></caption>
     <tr>
@@ -46,5 +48,16 @@
     </c:forEach>
   </table>
 </div>
+<script>
+  function handleChange(selectedValue) {
+    if (selectedValue === "1") {
+      window.location.href = '?sort=1';
+    } else if (selectedValue === "2") {
+      window.location.href = '?sort=2';
+    }else {
+      window.location.href = '/users';
+    }
+  }
+</script>
 </body>
 </html>

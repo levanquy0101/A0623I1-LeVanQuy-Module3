@@ -15,7 +15,7 @@ public class ImlUserRepository implements IUserRepository {
     private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (name, email, country) VALUES " +
             " (?, ?, ?);";
     private static final String SELECT_USER_BY_ID = "select id,name,email,country from users where id =?";
-    private static final String SELECT_USER_BY_COUNTRY = "select id,name,email,country from users where country =?";
+    private static final String SELECT_USER_BY_COUNTRY = "SELECT * FROM users WHERE country LIKE ?";
     private static final String SELECT_ALL_USERS = "select * from users";
     private static final String DELETE_USERS_SQL = "delete from users where id = ?;";
     private static final String UPDATE_USERS_SQL = "update users set name = ?,email= ?, country =? where id = ?;";
@@ -125,34 +125,57 @@ public class ImlUserRepository implements IUserRepository {
         return rowUpdated;
     }
 
-//    @Override
-//    public List<User> searchUser(String country) {
-//        return null;
-//    }
 
     @Override
-public List<User> searchUser(String country) {
-    List<User> userList = new ArrayList<>();
-    // Step 1: Establishing a Connection
-    try (Connection connection = getConnection();
-         // Step 2: Create a statement using connection object
-         PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_COUNTRY);) {
-        preparedStatement.setString(1, country);
-        System.out.println(preparedStatement);
-        // Step 3: Execute the query or update query
-        ResultSet rs = preparedStatement.executeQuery();
-        // Step 4: Process the ResultSet object.
-        while (rs.next()) {
-            int id = rs.getInt("id");
-            String name = rs.getString("name");
-            String email = rs.getString("email");
-            userList.add(new User(id, name, email, country));
+    public List<User> searchUser(String searchKeyword) {
+        List<User> userList = new ArrayList<>();
+        // Step 1: Establishing a Connection
+        try (Connection connection = getConnection();
+             // Step 2: Create a statement using connection object
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_COUNTRY)) {
+            // Sử dụng phương thức setString để thiết lập giá trị của tham số và thêm dấu % để thực hiện tìm kiếm mô phỏng
+            preparedStatement.setString(1, "%" + searchKeyword + "%");
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            ResultSet rs = preparedStatement.executeQuery();
+            // Step 4: Process the ResultSet object.
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String email = rs.getString("email");
+                String country = rs.getString("country");
+                userList.add(new User(id, name, email, country));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
         }
-    } catch (SQLException e) {
-        printSQLException(e);
+        return userList;
     }
-    return userList;
-}
+
+
+    @Override
+    public List<User> sortName() {
+        List<User> userList = new ArrayList<>();
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users ORDER BY name");) {
+            System.out.println(preparedStatement);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String email = rs.getString("email");
+                String country = rs.getString("country");
+                userList.add(new User(id, name, email, country));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return userList;
+    }
+
 
     private void printSQLException(SQLException ex) {
         for (Throwable e : ex) {

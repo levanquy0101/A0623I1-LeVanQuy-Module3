@@ -38,4 +38,9 @@ public class ImlUserService implements IUserService {
     public List<User> searchUser(String country) {
         return imlUserRepositories.searchUser(country);
     }
+
+    @Override
+    public List<User> sortName() {
+        return imlUserRepositories.sortName();
+    }
 }
